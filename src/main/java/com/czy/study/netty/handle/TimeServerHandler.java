@@ -37,15 +37,15 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
      * @param msg
      * @throws Exception
      */
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String body = (String) msg;
-        System.out.println("The time server receive order : " + body + "； the counter is :" + ++counter);
-        String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date().toString() : "BAD ORDER";
-        currentTime = currentTime +  System.getProperty("line.separator");
-        ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
-        ctx.write(resp);
-    }
+//    @Override
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//        String body = (String) msg;
+//        System.out.println("The time server receive order : " + body + "； the counter is :" + ++counter);
+//        String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date().toString() : "BAD ORDER";
+//        currentTime = currentTime +  System.getProperty("line.separator");
+//        ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
+//        ctx.write(resp);
+//    }
 
     /**
      * 读数据/拆包
@@ -72,10 +72,10 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
      * @param ctx
      * @throws Exception
      */
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.flush();
-    }
+//    @Override
+//    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+//        ctx.flush();
+//    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {

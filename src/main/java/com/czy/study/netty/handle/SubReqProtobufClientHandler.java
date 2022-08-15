@@ -1,25 +1,29 @@
 package com.czy.study.netty.handle;
 
-import io.netty.buffer.Unpooled;
+import com.czy.study.netty.serialize.jdk.SubScribeReq;
+import com.czy.study.netty.serialize.protobuf.SubscribeReqProto;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
-public class EchoClientHandler extends ChannelHandlerAdapter {
-    private int counter;
-
-    static final String ECHO_REQ = "Hi Lilinfeng. Welcome to Netty.$_";
-
+public class SubReqProtobufClientHandler extends ChannelHandlerAdapter {
 //    @Override
 //    public void channelActive(ChannelHandlerContext ctx) throws Exception {
 //        for (int i = 0; i < 10; i++) {
-//            ctx.writeAndFlush(Unpooled.copiedBuffer(ECHO_REQ.getBytes()));
+//            ctx.write(subReq(i));
 //        }
+//        ctx.flush();
 //    }
-//
-//
+
+    private Object subReq(int i) {
+        SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq.newBuilder();
+        builder.setSubReqID(i).setUserName("Lilinfeng").setAddress("广州")
+        .setProductName("Netty 权威指南");
+        return builder.build();
+    }
+
 //    @Override
 //    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        System.out.println("This is "+ ++counter + " times receive server : [" + msg +"]");
+//        System.out.println("Receive server response :" + msg.toString());
 //    }
 //
 //    @Override

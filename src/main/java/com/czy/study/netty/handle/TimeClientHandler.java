@@ -30,15 +30,15 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
      * @param ctx
      * @throws Exception
      */
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ByteBuf message = null;
-        for (int i = 0; i < 100; i++) {
-            message = Unpooled.buffer(req.length);
-            message.writeBytes(req);
-            ctx.writeAndFlush(message);
-        }
-    }
+//    @Override
+//    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//        ByteBuf message = null;
+//        for (int i = 0; i < 100; i++) {
+//            message = Unpooled.buffer(req.length);
+//            message.writeBytes(req);
+//            ctx.writeAndFlush(message);
+//        }
+//    }
 
     /**
      * 发送消息
@@ -68,11 +68,11 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 //
 //    }
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String body = (String) msg;
-        System.out.println("Now is :" + body + "； counter is:"+ ++counter);
-    }
+//    @Override
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//        String body = (String) msg;
+//        System.out.println("Now is :" + body + "； counter is:"+ ++counter);
+//    }
 
     /**
      * 读消息/拆包

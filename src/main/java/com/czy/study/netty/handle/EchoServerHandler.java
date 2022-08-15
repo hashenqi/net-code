@@ -15,10 +15,10 @@ public class EchoServerHandler extends ChannelHandlerAdapter {
      * @param msg
      * @throws Exception
      */
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("Receive client : ["+ msg +"]");
-    }
+//    @Override
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//        System.out.println("Receive client : ["+ msg +"]");
+//    }
 
     /**
      * 自定义分隔符的处理流程

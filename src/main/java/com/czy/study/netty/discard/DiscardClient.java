@@ -1,4 +1,4 @@
-package com.czy.study.netty.echo;
+package com.czy.study.netty.discard;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -11,24 +11,24 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-public class EchoClient {
+public class DiscardClient {
     public static final int SIZE = 256;
     public static void main(String[] args) {
         EventLoopGroup group = new NioEventLoopGroup();
         try{
             Bootstrap b = new Bootstrap();
             b.group(group)
+                    .option(ChannelOption.SO_KEEPALIVE,true)
                     .channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY,true)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-//                            ch.pipeline().addLast(new LoggingHandler(LogLevel.INFO));
-                            ch.pipeline().addLast(new EchoClientHandler());
+                            ch.pipeline().addLast(new LoggingHandler(LogLevel.INFO));
+                            ch.pipeline().addLast(new DiscardClientHandler());
                         }
                     });
-            ChannelFuture future = b.connect("127.0.0.1", 8090).sync();
-            future.channel().closeFuture().sync();
+            ChannelFuture channelFuture = b.connect("127.0.0.1", 8090).sync();
+            channelFuture.channel().closeFuture().sync();
         }catch (Exception e) {
 
         }finally {
